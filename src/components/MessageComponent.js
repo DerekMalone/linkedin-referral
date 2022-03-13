@@ -4,7 +4,7 @@ import React from 'react';
 export default function MessageComponent({ message }) {
   return (
     <div>
-      {/* <h5>{mes}</h5> */}
+      <h5>{message.displayName}</h5>
       <p>{message.details}</p>
     </div>
   );

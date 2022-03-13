@@ -1,14 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import getAllMessages from '../api/data/messagesData';
-import MessageComponent from '../components/MessageComponent';
+import { getDereksMes, getSabrinasMes, getYasminesMes } from '../api/data/messagesData';
+// import MessageComponent from '../components/MessageComponent';
 
 export default function Messages() {
-  const [messages, setMessages] = useState([]);
+  const [dMessages, setDMessages] = useState([]);
+  const [sMessages, setSMessages] = useState([]);
+  const [yMessages, setYMessages] = useState([]);
 
   useEffect(() => {
     let isMounted = true;
-    getAllMessages().then((messageArray) => {
-      if (isMounted) setMessages(messageArray);
+    getDereksMes().then((messageArray) => {
+      if (isMounted) setDMessages(messageArray);
+    });
+    getSabrinasMes().then((messageArray) => {
+      if (isMounted) setSMessages(messageArray);
+    });
+    getYasminesMes().then((messageArray) => {
+      if (isMounted) setYMessages(messageArray);
     });
     return () => {
       isMounted = false;
@@ -17,9 +25,18 @@ export default function Messages() {
 
   return (
     <>
-      {messages.map((message) => (
+      <div className="dereksDiv">
+        {dMessages.displayName}
+      </div>
+      <div className="dereksDiv">
+        {sMessages.displayName}
+      </div>
+      <div className="dereksDiv">
+        {yMessages.displayName}
+      </div>
+      {/* {messages.map((message) => (
         <MessageComponent key={message.userId} message={message} />
-      ))}
+      ))} */}
     </>
   );
 }
