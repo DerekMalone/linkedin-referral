@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 // import PropTypes from 'prop-types';
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import {
   Button, Form, FormGroup, Label, Input,
 } from 'reactstrap';
+import { addProfileRelationship } from '../api/data/profileData';
 
 const initialState = {
   name1: '',
@@ -14,7 +15,7 @@ const initialState = {
 };
 
 export default function Refer() {
-  // const history = useHistory();
+  const history = useHistory();
   const [formInput, setFormInput] = useState(initialState);
 
   const handleChange = (e) => {
@@ -26,14 +27,16 @@ export default function Refer() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    // addProfileRelationship({ ...formInput }).then(() => {
-    //   history.push('/');
+    addProfileRelationship({ ...formInput }).then(() => {
+      history.push('/');
+    });
   };
   return (
     // form to connect the two people
     // connect button will post the profile relationship object to fb
     <>
       <div>
+        <h1>Make a Referral</h1>
         <Form onSubmit={handleClick}>
           <FormGroup>
             <Label for="name1">Name 1:</Label>

@@ -17,4 +17,18 @@ const getSingleProfile = (firebaseKey) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-export { getAllProfiles, getSingleProfile };
+const addProfileRelationship = (relationshipObj) => new Promise((resolve, reject) => {
+  axios
+    .post(`${dbUrl}/profileRelationships.json`, relationshipObj)
+    .then((response) => {
+      const relationshipId = response.data.name;
+      axios
+        .patch(`${dbUrl}/profileRelationships/${relationshipId}.json`, {
+          relationshipId,
+        })
+        .then(resolve);
+    })
+    .catch(reject);
+});
+
+export { getAllProfiles, getSingleProfile, addProfileRelationship };
