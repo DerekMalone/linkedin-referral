@@ -53,7 +53,8 @@ export default function Refer() {
         display: 'flex',
         justifyContent: 'center',
         textAlign: 'left',
-        minHeight: '90vh',
+        height: 775,
+        marginTop: 75,
       }}
     >
       <div
@@ -92,6 +93,7 @@ export default function Refer() {
           <FormGroup>
             <Label for="name1">Who do you want to refer?*</Label>
             <Input
+              style={{ marginBottom: 15 }}
               onChange={(e) => handleChange(e)}
               value={formInput.name1 || ''}
               type="text"
@@ -101,6 +103,7 @@ export default function Refer() {
             />
             <Label for="name2">Who are you referring to?*</Label>
             <Input
+              style={{ marginBottom: 15 }}
               onChange={(e) => handleChange(e)}
               value={formInput.name2 || ''}
               type="text"
@@ -110,6 +113,7 @@ export default function Refer() {
             />
             <Label for="jobTitle">What role are you referring for?</Label>
             <Input
+              style={{ marginBottom: 15 }}
               onChange={(e) => handleChange(e)}
               value={formInput.jobTitle || ''}
               type="text"
@@ -119,6 +123,7 @@ export default function Refer() {
             />
             <Label for="message">Introduction Message*</Label>
             <Input
+              style={{ marginBottom: 15 }}
               onChange={(e) => handleChange(e)}
               value={formInput.message || ''}
               type="textarea"
@@ -128,6 +133,7 @@ export default function Refer() {
             />
             <Label for="skills">Relevant skills:</Label>
             <Input
+              style={{ marginBottom: 15 }}
               onChange={(e) => handleChange(e)}
               value={formInput.skills || ''}
               type="text"
