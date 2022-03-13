@@ -29,10 +29,15 @@ export default function Refer() {
     }));
   };
 
+  const resetForm = () => {
+    setFormInput(initialState);
+  };
+
   const handleClick = (e) => {
     e.preventDefault();
     addProfileRelationship({ ...formInput }).then(() => {
-      history.push('/');
+      resetForm();
+      history.push('/refer');
     });
   };
 
