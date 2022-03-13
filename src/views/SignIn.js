@@ -1,13 +1,22 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { signInUser } from '../api/auth';
 
 export default function SignIn() {
+  const history = useHistory();
+
   return (
-    <div className="text-center mt-5">
-      <h1>Welcome! Sign In!</h1>
-      <button type="button" className="btn btn-success" onClick={signInUser}>
+    <>
+      <button
+        type="button"
+        onClick={() => {
+          signInUser().then(() => {
+            history.push('/profile');
+          });
+        }}
+      >
         Sign In
       </button>
-    </div>
+    </>
   );
 }

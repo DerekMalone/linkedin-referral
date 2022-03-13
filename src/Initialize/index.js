@@ -1,38 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import Nav from '../components/Nav';
+import Routes from '../routes/index';
+import { signInUser } from '../api/auth';
 
 function Initialize() {
-  const [domWriting, setDomWriting] = useState('Nothing Here!');
+  const [user, setUser] = useState(null);
+  const history = useHistory();
 
-  const handleClick = (e) => {
-    console.warn(`You clicked ${e.target.id}`);
-    setDomWriting(`You clicked ${e.target.id}! Check the Console!`);
-  };
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((authed) => {
+      if (authed) {
+        const userObj = {
+          fullName: authed.displayName,
+          uid: authed.uid,
+        };
+        setUser(userObj);
+      }
+    });
+  }, []);
 
   return (
-    <div className="App">
-      <h2>INSIDE APP COMPONENT</h2>
-      <div>
-        <button
-          type="button"
-          id="this-button"
-          className="btn btn-info"
-          onClick={handleClick}
-        >
-          I am THIS button
-        </button>
-      </div>
-      <div>
-        <button
-          type="button"
-          id="that-button"
-          className="btn btn-primary mt-3"
-          onClick={handleClick}
-        >
-          I am THAT button
-        </button>
-      </div>
-      <h3>{domWriting}</h3>
-    </div>
+    <>
+      {user ? (
+        <>
+          <Nav user={user} />
+          <Routes user={user} />
+        </>
+      ) : (
+        <>
+          <button
+            type="button"
+            onClick={() => {
+              signInUser().then(() => {
+                history.push('/');
+              });
+            }}
+          >
+            Sign In
+          </button>
+        </>
+      )}
+    </>
   );
 }
 
