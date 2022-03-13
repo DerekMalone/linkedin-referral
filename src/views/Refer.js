@@ -29,10 +29,15 @@ export default function Refer() {
     }));
   };
 
+  const resetForm = () => {
+    setFormInput(initialState);
+  };
+
   const handleClick = (e) => {
     e.preventDefault();
     addProfileRelationship({ ...formInput }).then(() => {
-      history.push('/');
+      resetForm();
+      history.push('/refer');
     });
   };
 
@@ -53,7 +58,7 @@ export default function Refer() {
         display: 'flex',
         justifyContent: 'center',
         textAlign: 'left',
-        height: 775,
+        height: 900,
         marginTop: 75,
       }}
     >
@@ -81,7 +86,12 @@ export default function Refer() {
               }}
             >
               <img
-                style={{ borderRadius: 50, marginRight: 10 }}
+                style={{
+                  borderRadius: 120,
+                  marginRight: 10,
+                  width: 100,
+                  height: 100,
+                }}
                 src={profile.photoURL}
                 alt={profile.displayName}
               />
